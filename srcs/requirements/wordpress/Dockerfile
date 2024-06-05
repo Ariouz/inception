@@ -17,5 +17,9 @@ RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" \
 	sed -i "s|;listen.group = nobody|listen.group = nobody|g" \
 	/etc/php8/php-fpm.d/www.conf
 
+COPY conf/config-wp.sh /var/www/wordpress/config-wp.sh
+RUN ls -l /var/www/wordpress && sleep 5
+#RUN sh config-wp.sh && rm config-wp.sh
+
 #EXPOSE 9000
 CMD ["/usr/sbin/php-fpm8", "-F"]
