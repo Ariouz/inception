@@ -1,10 +1,3 @@
-#!/bin/sh
-
-if [ ! -f /var/www/wordpress/wp-config.php ]; then
-
-	echo "wp-config.php file doesnt exists"
-
-	cat << EOF > /var/www/wordpress/wp-config.php
 <?php
 define( 'DB_NAME', getenv('MYSQL_DATABASE') );
 define( 'DB_USER', getenv('MYSQL_USER') );
@@ -20,12 +13,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once ABSPATH . 'wp-settings.php';
-EOF
-
-	echo "wp-config.php created"
-	#rm -f /var/www/wordpress/wp-config-sample.php
-fi
-
-#echo "Wordpress container started"
-#/usr/sbin/php-fpm8 -F
 

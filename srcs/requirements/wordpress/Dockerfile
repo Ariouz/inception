@@ -57,13 +57,6 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x wp-cli.phar
 RUN cp wp-cli.phar /usr/bin/wp
 
-#RUN mkdir -p /var/www/ \
-#	&& cd /var/www/ \
-#	&& wget https://wordpress.org/latest.tar.gz \
-#	&& tar -xzvf latest.tar.gz \
-#	&& rm latest.tar.gz
-#RUN chown -R root:root /var/www/wordpress
-
 RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" \
 	/etc/php8/php-fpm.d/www.conf && \
 	sed -i "s|;listen.owner = nobody|listen.owner = nobody|g" \
@@ -71,8 +64,14 @@ RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" \
 	sed -i "s|;listen.group = nobody|listen.group = nobody|g" \
 	/etc/php8/php-fpm.d/www.conf
 
-COPY conf/config.sh /tmp/config-wp.sh
-RUN chmod 755 /tmp/config-wp.sh
+COPY conf/config.sh /tmp/config.sh
+RUN chmod 755 /tmp/config.sh
+
+#COPY conf/config-wp.sh /tmp/config-wp.sh
+#RUN chmod 755 /tmp/config-wp.sh
+
+#RUN mkdir -p /var/www/wordpress
+#COPY conf/wp-config.php /var/www/wordpress/wp-config.php
 
 #EXPOSE 9000
-CMD ["sh", "/tmp/config-wp.sh"]
+CMD ["sh", "/tmp/config.sh"]
