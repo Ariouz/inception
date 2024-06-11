@@ -67,11 +67,4 @@ RUN sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" \
 COPY conf/config.sh /tmp/config.sh
 RUN chmod 755 /tmp/config.sh
 
-#COPY conf/config-wp.sh /tmp/config-wp.sh
-#RUN chmod 755 /tmp/config-wp.sh
-
-#RUN mkdir -p /var/www/wordpress
-#COPY conf/wp-config.php /var/www/wordpress/wp-config.php
-
-#EXPOSE 9000
 CMD ["sh", "/tmp/config.sh"]
